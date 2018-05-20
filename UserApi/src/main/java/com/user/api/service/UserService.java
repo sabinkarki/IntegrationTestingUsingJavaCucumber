@@ -23,13 +23,13 @@ public class UserService {
 
         users = new ArrayList<>();
         User user1 = new User(++i);
-        user1.setFirstName("Test");
-        user1.setLastName("Test");
+        user1.setFirstName("Nikita");
+        user1.setLastName("Master");
         user1.setState("California");
 
         User user2 = new User(++i);
-        user2.setFirstName("Integration");
-        user2.setLastName("Integration");
+        user2.setFirstName("Sabin");
+        user2.setLastName("Branch");
         user2.setState("California");
         users.add(user1);
         users.add(user2);
