@@ -1,6 +1,7 @@
 package rest.resource;
 
 import config.ApplicationProperties;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.core.ParameterizedTypeReference;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpHeaders;
@@ -15,6 +16,7 @@ import java.util.List;
 /**
  * Created by sabin on 5/20/2018.
  */
+@Slf4j
 public class UserApiResource {
 
     private String resourceUrl;
@@ -40,6 +42,7 @@ public class UserApiResource {
             List<UserDto> userDtos = usersTemp.getBody();
             return userDtos;
         } catch (Exception e) {
+            log.error("Error occured in UserApiResource.getUsers", e.getMessage());
             throw new RuntimeException("Exception in UserApiResource.getUsers", e);
         }
     }
