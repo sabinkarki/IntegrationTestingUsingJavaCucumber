@@ -37,3 +37,16 @@ be seen in users.feature.
 <h2>Running UserApiTesting</h2>
 <h4>Open ApiTestRunner from runner package.Right click and Run</h4>
 </div>
+
+
+<div>
+  <h2>Report After Running Cucumber</h2>
+<h4>Report Location</h4>
+  ../target/cucumber/api/index.html
+<h4>Pass report</h4>
+
+![passreport](https://user-images.githubusercontent.com/14364853/40896875-c0f11ad4-6785-11e8-9882-b35a9dfbaac1.png)
+<h4>Actual Report index.html</h4>
+
+![report-cucumber](https://user-images.githubusercontent.com/14364853/40896879-c392ec54-6785-11e8-9226-ab9ffebe369a.png)
+</div>
