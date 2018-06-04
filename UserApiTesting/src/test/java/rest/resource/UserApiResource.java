@@ -11,6 +11,7 @@ import org.springframework.web.util.UriComponentsBuilder;
 import rest.dto.UserDto;
 import rest.helper.RestHelper;
 
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -32,14 +33,20 @@ public class UserApiResource {
             HttpHeaders headers = RestHelper.getHeaders();
             HttpEntity entity = new HttpEntity(headers);
 
+            List<UserDto> userDtos = new ArrayList<>();
             if (userId != null) {
-                UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(resourceUrl)
+                /*UriComponentsBuilder builder = UriComponentsBuilder.fromHttpUrl(resourceUrl)
                         .queryParam("userId", userId);
-                resourceUrl = builder.toUriString();
+                resourceUrl = builder.toUriString();*/
+                resourceUrl = resourceUrl +"/"+ Long.valueOf(userId);
+                HttpEntity<UserDto> usersTemp = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, UserDto.class);
+                UserDto userDto = usersTemp.getBody();
+                userDtos.add(userDto);
+            } else {
+                HttpEntity<List<UserDto>> usersTemp = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, new ParameterizedTypeReference<List<UserDto>>() {
+                });
+                userDtos = usersTemp.getBody();
             }
-            HttpEntity<List<UserDto>> usersTemp = restTemplate.exchange(resourceUrl, HttpMethod.GET, entity, new ParameterizedTypeReference<List<UserDto>>() {
-            });
-            List<UserDto> userDtos = usersTemp.getBody();
             return userDtos;
         } catch (Exception e) {
             log.error("Error occured in UserApiResource.getUsers", e.getMessage());

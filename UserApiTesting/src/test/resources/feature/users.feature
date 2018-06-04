@@ -20,3 +20,14 @@ Feature: Users
       | Java      | OOP      | TX    |
       | .Net      | MVC      | VA    |
       | PHP       | HTML     | DC    |
+
+  @api
+  Scenario Outline: Find User Based On User Id
+    Given Two users should exist in the system
+    When getUserById service is invoked "<id>"
+    Then user with following name should exist "<Name>"
+
+    Examples:
+      | id | Name   |
+      | 1  | Nikita |
+      | 2  | Sabin  |

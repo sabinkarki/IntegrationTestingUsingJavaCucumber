@@ -49,4 +49,15 @@ public class UsersServiceValidation {
 
         assertArrayEquals(expectedUserDtos, usersActualDto.toArray());
     }
+
+    @Then("^user with following name should exist \"([^\"]*)\"$")
+    public void user_with_following_name_should_exist(String expectedUsername) throws Throwable {
+        List<UserDto> usersActual = this.usersServiceCall.getUsers();
+        assertNotNull(usersActual);
+        assertEquals(1, usersActual.size());
+        long count = usersActual.stream()
+                .filter(user -> user.getFirstName().equals(expectedUsername))
+                .count();
+        assertEquals(1L, count);
+    }
 }

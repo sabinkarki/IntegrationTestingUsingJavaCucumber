@@ -37,4 +37,9 @@ public class UsersServiceCall {
         this.users = this.resource.getUsers("/usersExceptDefault", null);
     }
 
+    @When("^getUserById service is invoked \"([^\"]*)\"$")
+    public void getuserbyid_service_is_invoked(String id) throws Throwable {
+        this.users = this.resource.getUsers("/users", id);
+    }
+
 }
