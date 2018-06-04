@@ -1,19 +1,24 @@
 package com.user.api.domain;
 
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
 /**
  * Created by sabin on 5/6/2018.
  */
 
-@Data
+@Getter
+@Setter
 public class User {
-    private int id;
+    private Long id;
     private String firstName;
     private String lastName;
     private String state;
 
-    public User(int id) {
+    public User(){};
+
+    public User(long id) {
         this.id = id;
     }
 }

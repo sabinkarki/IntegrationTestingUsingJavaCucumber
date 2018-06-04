@@ -18,6 +18,7 @@ import java.util.List;
 @RequiredArgsConstructor
 public class UsersServiceCall {
 
+    @Getter
     @NonNull
     private UserApiResource resource;
 
@@ -29,4 +30,11 @@ public class UsersServiceCall {
         log.info("UsersServiceCall.users_service_is_invoked()");
         this.users = this.resource.getUsers("/users", null);
     }
+
+    @When("^getAllUsersExceptDefaultData service is invoked$")
+    public void getAllUsersExceptDefaultData() throws Throwable {
+        log.info("UsersServiceCall.users_service_is_invoked()");
+        this.users = this.resource.getUsers("/usersExceptDefault", null);
+    }
+
 }

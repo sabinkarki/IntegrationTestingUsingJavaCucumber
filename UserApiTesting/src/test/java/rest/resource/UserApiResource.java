@@ -46,4 +46,26 @@ public class UserApiResource {
             throw new RuntimeException("Exception in UserApiResource.getUsers", e);
         }
     }
+
+    public void postUsers(UserDto userDto) {
+        String resourceUrl = this.resourceUrl + "/";
+        try {
+            RestTemplate restTemplate = RestHelper.getRestTemplate();
+            HttpHeaders headers = RestHelper.getHeaders();
+            HttpEntity<UserDto> entity = new HttpEntity(userDto, headers);
+            HttpEntity<String> usersTemp = restTemplate.exchange(resourceUrl, HttpMethod.POST, entity, String.class);
+
+        } catch (Exception e) {
+            log.error("Error occured in UserApiResource.postUsers", e.getMessage());
+            throw new RuntimeException("Exception in UserApiResource.postUsers", e);
+        }
+    }
+
+    public void deleteAddedUser() {
+        String resourceUrl = this.resourceUrl + "/";
+        RestTemplate restTemplate = RestHelper.getRestTemplate();
+        HttpHeaders headers = RestHelper.getHeaders();
+        HttpEntity entity = new HttpEntity(headers);
+        HttpEntity<String> usersTemp = restTemplate.exchange(resourceUrl, HttpMethod.DELETE, entity, String.class);
+    }
 }

@@ -17,7 +17,7 @@ import java.util.stream.Collectors;
 public class UserService {
 
     private static List<User> users;
-    private static int i = 0;
+    private static long i = 0;
 
     static {
 
@@ -36,7 +36,7 @@ public class UserService {
     }
 
     public void addUser(User user) {
-        int i = users.size();
+        long i = users.size();
         user.setId(++i);
         users.add(user);
     }
@@ -49,12 +49,29 @@ public class UserService {
 
         if (usersTemp.size() == 1) {
             users.remove(usersTemp.get(0));
+            return true;
         }
         return false;
     }
 
     public List<User> getUsers() {
         return users;
+    }
+
+    public List<User> getUsersExceptDefault() {
+        return users.stream()
+                .filter(user -> user.getId() != 1)
+                .filter(user -> user.getId() != 2)
+                .collect(Collectors.toList());
+    }
+
+    public boolean removeUserExceptDefaultData() {
+    	
+        if (users.size() > 2) {
+        	users = users.subList(0,2);
+        }
+    	
+        return true;
     }
 
 }

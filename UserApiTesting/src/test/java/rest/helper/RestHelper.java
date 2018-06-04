@@ -19,6 +19,7 @@ public class RestHelper {
     public static RestTemplate getRestTemplate() {
         RestTemplate restTemplate = new RestTemplate();
         restTemplate.getMessageConverters().add(new MappingJackson2HttpMessageConverter());
+        restTemplate.setErrorHandler(new ErrorHandler());
         return restTemplate;
     }
 }

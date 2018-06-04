@@ -17,7 +17,7 @@ import java.util.List;
 
 
 @RestController
-@RequestMapping(value = "api/v1/", produces = MediaType.APPLICATION_JSON_VALUE)
+@RequestMapping(value = "api/v1/", produces = MediaType.APPLICATION_JSON_VALUE, consumes = MediaType.APPLICATION_JSON_VALUE)
 public class UserController {
 
     @Autowired
@@ -29,15 +29,21 @@ public class UserController {
         return new ResponseEntity<>(users, HttpStatus.OK);
     }
 
+    @GetMapping(value = {"/usersExceptDefault"})
+    public ResponseEntity<?> getUsersExceptDefault() {
+        List<User> users = this.userService.getUsersExceptDefault();
+        return new ResponseEntity<>(users, HttpStatus.OK);
+    }
+
     @PostMapping("/")
-    public ResponseEntity<?> postUsers(@ApiParam(value = "User", required = true) User user) {
+    public ResponseEntity<?> postUsers(@ApiParam(value = "User", required = true) @RequestBody User user) {
         userService.addUser(user);
         return new ResponseEntity<>(true, HttpStatus.CREATED);
     }
 
-    @DeleteMapping
-    public ResponseEntity<?> deleteUser(@ApiParam(value = "Id of User", required = true) @RequestParam("id") int id) {
-        return new ResponseEntity<>(userService.removeUser(id), HttpStatus.NO_CONTENT);
+    @DeleteMapping("/")
+    public ResponseEntity<?> deleteUserExceptDefaultData() {
+        return new ResponseEntity<>(userService.removeUserExceptDefaultData(), HttpStatus.NO_CONTENT);
     }
 
 }
