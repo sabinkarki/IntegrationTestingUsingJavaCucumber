@@ -2,7 +2,9 @@ package com.user.api.controller;
 
 import com.user.api.domain.User;
 import com.user.api.service.UserService;
+
 import io.swagger.annotations.ApiParam;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -10,6 +12,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+
+import javax.websocket.server.PathParam;
 
 /**
  * Created by sabin on 5/6/2018.
@@ -44,6 +48,15 @@ public class UserController {
     @DeleteMapping("/")
     public ResponseEntity<?> deleteUserExceptDefaultData() {
         return new ResponseEntity<>(userService.removeUserExceptDefaultData(), HttpStatus.NO_CONTENT);
+    }
+    
+    @GetMapping(value = {"/users/{id}"})
+    public ResponseEntity<?> getUserById(@ApiParam(value ="id",required =true)@PathVariable("id") long id) {
+        User user = this.userService.findUserById(id);
+        if(user == null){
+        	return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        }
+        return new ResponseEntity<>(user, HttpStatus.OK);
     }
 
 }

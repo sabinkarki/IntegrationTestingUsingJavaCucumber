@@ -73,5 +73,15 @@ public class UserService {
     	
         return true;
     }
+    
+    public User findUserById(long id){
+    	 if(id > users.size()){
+    		 return null;
+    	 }
+    	 List<User> tempUsers=      users.stream()
+    	        .filter(user->user.getId()==id)
+    	        .collect(Collectors.toList());
+          return tempUsers.get(0);			          
+    }
 
 }
