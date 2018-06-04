@@ -12,10 +12,10 @@ Maven
 <h1>Description</h2>
 <h4>
 <pre>
-This project is about BBD testing using cucumber-java as 
+This project is about BDD testing using cucumber-java as 
 client side(UserApiTesting) and
 Spring Boot as Server side(UserApi).The purpose of the project 
-is soley for education only.During the start up of
+is solely for education only.During the start up of
 the application two users are created.Users are also added from
 cucumber(client side) and deleted after the completion of test.
 Couple of rest resources are added in controller of UserApi. 
